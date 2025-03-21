@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Offline Website</title>
-    <link rel="stylesheet" href="./style.css">  <!-- Ensured correct CSS path -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>test website</h1>
@@ -14,7 +14,7 @@
 </html>
 <script>
     if ("serviceWorker" in navigator) {
-        navigator.serviceWorker.register("./service-worker.js")  // Fixed path issue
+        navigator.serviceWorker.register("service-worker.js")
             .then(() => console.log("Service Worker Registered"))
             .catch(error => console.log("Service Worker Registration Failed", error));
     }
