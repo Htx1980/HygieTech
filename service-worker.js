@@ -9,15 +9,15 @@ const OFFLINE_FILES = [
 self.addEventListener("install", (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
-            return cache.addAll(OFFLINE_FILES);
+            return cache.addAll(urlsToCache);
         })
     );
 });
 
 self.addEventListener("fetch", (event) => {
     event.respondWith(
-        fetch(event.request).catch(() => {
-            return caches.match(event.request) || caches.match("index.html");
+        caches.match(event.request).then((response) => {
+            return response || fetch(event.request);
         })
     );
 });
