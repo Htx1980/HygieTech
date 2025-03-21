@@ -1,9 +1,10 @@
 ﻿const CACHE_NAME = "offline-cache-v1";
 const OFFLINE_FILES = [
-    "index.html",
-    "style.css",
-    "script.js",
-    "icon.png"
+    "/HygieTech/", // Root page (GitHub Pages)
+    "/HygieTech/index.html",
+    "/HygieTech/style.css",
+    "/HygieTech/script.js",
+    "/HygieTech/icon.png"
 ];
 
 self.addEventListener("install", (event) => {
@@ -35,18 +36,11 @@ self.addEventListener("fetch", (event) => {
     event.respondWith(
         fetch(event.request)
             .then(response => {
-                // If fetch is successful, return the response
                 return response;
             })
             .catch(() => {
-                // If offline, return cache or fallback to index.html
                 return caches.match(event.request)
-                    .then((response) => {
-                        return response || caches.match("index.html");
-                    })
-                    .catch(() => {
-                        console.error("Service Worker Fetch Failed:", event.request.url);
-                    });
+                    .then((response) => response || caches.match("/HygieTech/index.html"));
             })
     );
 });
